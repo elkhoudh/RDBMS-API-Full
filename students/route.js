@@ -37,8 +37,10 @@ route.post("/", (req, res) => {
 route.get("/:id", (req, res) => {
   const { id } = req.params;
 
-  db("students")
-    .where({ id })
+  db.select("c.id", "s.name", "c.name as cohort")
+    .from("cohorts as c")
+    .join("students as s", "c.id", "s.cohort_id")
+    .where("s.cohort_id", id)
     .first()
     .then(student => {
       if (student) {
