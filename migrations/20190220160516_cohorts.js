@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("cohorts", tbl => {
-    tbl.incements();
+    tbl.increments();
     tbl.string("name").notNullable();
   });
 };
